@@ -31,10 +31,10 @@ function tableItem(index, order, yPos) {
 
 function addContent(order) {
     const defaultFontSize = doc.getFontSize();
-    let yPos = 100; // y axis
+    let yPos = 105; // y axis
 
     // Max Logo
-    doc.addImage(imgData, 'PNG', 10, 0, 50, 40);
+    doc.addImage(imgData, 'PNG', 10, 0, 50, 35);
 
     //Order Info
     doc.text(`Date: ${order.date}`, 130, 10);
@@ -60,15 +60,15 @@ function addContent(order) {
 
     // Table
     doc.text("Items:", 10, 90);
-    doc.text("#", 10, 95);
-    doc.text("Product", 17, 95);
-    doc.text("MAX-Product", 39, 95);
-    doc.text("Unit cost (after discounts)", 74, 95);
-    doc.text("Quantity", 139, 95);
-    doc.text("Shipped", 161, 95);
-    doc.text("Total", 183, 95);
+    doc.text("#", 10, 100);
+    doc.text("Product", 17, 100);
+    doc.text("MAX-Product", 39, 100);
+    doc.text("Unit cost (after discounts)", 74, 100);
+    doc.text("Quantity", 139, 100);
+    doc.text("Shipped", 161, 100);
+    doc.text("Total", 183, 100);
     doc.setLineWidth(0.5);
-    doc.line(10, 96, 195, 96);
+    doc.line(9, 101, 196, 101);
     doc.setLineWidth(0.1);
 
     // Table items
@@ -82,6 +82,11 @@ function addContent(order) {
         }
     }
     doc.setFontSize(defaultFontSize);
+    doc.setLineWidth(0.5);
+    doc.line(9, yPos + 1, 9, 101); // Left vertical line of table
+    doc.line(196, yPos + 1, 196, 101); // Rgiht vertical line of table
+    doc.line(9, yPos + 1, 196, yPos + 1);
+    doc.setLineWidth(0.1);
 
     // Order Total
     yPos += 20;
