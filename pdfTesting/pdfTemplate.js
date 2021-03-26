@@ -26,6 +26,7 @@ function tableItem(index, order, yPos) {
     doc.text(`${order.quantity[index]}`, 139, yPos);
     doc.text(`${order.shipped[index]}`, 161, yPos);
     doc.text(`$${(Number(order.unit_cost[index]) * Number(order.quantity[index])).toFixed(2)}`, 183, yPos);
+    doc.line(10, yPos + 1, 195, yPos + 1);
 }
 
 function addContent(order) {
@@ -33,31 +34,29 @@ function addContent(order) {
     let yPos = 100; // y axis
 
     // Max Logo
-    doc.addImage(imgData, 'PNG', 10, 0, 50, 50);
+    doc.addImage(imgData, 'PNG', 10, 0, 50, 40);
 
     //Order Info
-    if ("credit") {
-
-    } else {
-        doc.text(`Date: ${order.date}`, 130, 20);
-        doc.text(`Invoice #: ${order.invoiceId}`, 130, 25);
-        doc.text(`GST/HST #: ${order.gst_hst}`, 130, 30);
-        doc.text(`Method: ${order.method}`, 130, 35);
-    }
+    doc.text(`Date: ${order.date}`, 130, 10);
+    doc.text(`Invoice #: ${order.invoiceId}`, 130, 15);
+    doc.text(`GST/HST #: ${order.gst_hst}`, 130, 20);
+    doc.text(`Method: ${order.method}`, 130, 25);
+    
+    doc.text(`Invoice #: ${order.invoiceId}`, 10, 42);
 
     // Business Details
     doc.text("Business Details:", 10, 50);
-    doc.text("Max Advanced Brakes", 10, 55); // Company Name
-    doc.text('905-754-0575', 10, 60); // Phone Number
-    doc.text('280 Hilmount Road, Unit 5', 10, 65); // Address
-    doc.text('L6C 3A1 Markham, ON Canada', 10, 70); // PO and Province/State
+    doc.text("Max Advanced Brakes", 10, 60); // Company Name
+    doc.text('905-754-0575', 10, 65); // Phone Number
+    doc.text('280 Hilmount Road, Unit 5', 10, 70); // Address
+    doc.text('L6C 3A1 Markham, ON Canada', 10, 75); // PO and Province/State
 
     // Customer Details
     doc.text("Customer Details:", 130, 50);
-    doc.text(`${order.customerCompanyName}`, 130, 55); // Company Name
-    doc.text(`${order.customerNumber}`, 130, 60); // Phone Number
-    doc.text(`${order.customerAddress}`, 130, 65); // Address
-    doc.text(`${order.customerPoProvince}`, 130, 70); // PO and Province/State
+    doc.text(`${order.customerCompanyName}`, 130, 60); // Company Name
+    doc.text(`${order.customerNumber}`, 130, 65); // Phone Number
+    doc.text(`${order.customerAddress}`, 130, 70); // Address
+    doc.text(`${order.customerPoProvince}`, 130, 75); // PO and Province/State
 
     // Table
     doc.text("Items:", 10, 90);
@@ -68,6 +67,9 @@ function addContent(order) {
     doc.text("Quantity", 139, 95);
     doc.text("Shipped", 161, 95);
     doc.text("Total", 183, 95);
+    doc.setLineWidth(0.5);
+    doc.line(10, 96, 195, 96);
+    doc.setLineWidth(0.1);
 
     // Table items
     doc.setFontSize(10);
@@ -84,7 +86,7 @@ function addContent(order) {
     // Order Total
     yPos += 20;
     doc.text("Total:", 130, yPos);
-    yPos += 5;
+    yPos += 10;
     doc.text(`Subtotal:`, 130, yPos); // Subtotal
     doc.text(`$${order.subtotal}`, 165, yPos);
     yPos += 5;
