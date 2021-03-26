@@ -1,4 +1,6 @@
 const { createPDF } = require('./pdfTemplate.js');
-const { invoice } = require("./models.js");
+const { invoice, credit, statement } = require("./models.js");
 
-createPDF(invoice);
+createPDF(invoice, "invoice");
+createPDF(credit, "credit");
+createPDF(statement, "statement");

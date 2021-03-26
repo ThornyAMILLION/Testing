@@ -33,4 +33,32 @@ const invoice = {
     "company_name": "Max Advanced Brakes"
 };
 
-module.exports = { imgData, invoice };
+const credit = {
+    "return_id": 30020207,
+    "order_ids": "80002083",
+    "username": "Testadmin",
+    "date_created": "2021-03-19 16:17:25",
+    "refund_subtotal": "41.73",
+    "refund_total": "422.72",
+    "products": "R3295SNZ",
+    "qtys": "3",
+    "prices_discounted": "13.91"       
+};
+
+const statement = {
+    "statement_id": 10701311,
+    "username": "canadianautopartsdepot",
+    "date_created": "2019-05-01 00:00:07",
+    "invoice_dates": "2019-04-10,2019-04-10,2019-04-16,2019-04-10",
+    "types": "I,I,I,C",
+    "invoice_ids": "80001645,80001646,80001684,30020139",
+    "cost_totals": "253.12,13.05,169.59,21.92",
+    "balance_subtotal": "366.23",
+    "balance": "413.84",
+    "fully_paid": 1,
+    "paid_amount": "413.84",
+    "date_paid": "2021-03-10 17:31:50",
+    "markpaid_user": "Testadmin"
+}
+
+module.exports = { imgData, invoice, credit };

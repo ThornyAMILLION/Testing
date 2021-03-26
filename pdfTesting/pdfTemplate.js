@@ -3,10 +3,18 @@ const { imgData } = require("./models.js");
 
 const doc = new jsPDF();
 
-function createPDF(invoice) {
-    var order = { date: invoice.date_created, invoiceId: invoice.order_id, gst_hst: '', method: invoice.method, customerCompanyName: invoice.company_name, customerNumber: '', customerAddress: '', customerPoProvince: '', products: invoice.products.split(','), unit_cost: invoice.prices_discounted.split(','), quantity: invoice.qtys.split(','), shipped: invoice.qtys_shipped.split(','), subtotal: invoice.cost_subtotal, total: invoice.cost_final }
+function createPDF(content, pdfContent) {
+    var order;
 
-    addContent(order);
+    if (pdfContent === "credit") {
+        order = { return_id: content.return_id, order_ids: content.order_ids, username: content.username, date_created: content.date_created, refund_subtotal: content.refund_subtotal, refund_total: content.refund_total, products: content.products, qtys: content.qtys, prices_discounted: content.prices_discounted };
+    } else if (pdfContent === "statement") {
+        order = { statement_id: content.statement_id, username: content.username, date_created: content.date_created, invoice_dates: content.invoice_dates, types: content.types, invoice_ids: content.invoice_ids, cost_totals: content.cost_totals, balance_subtotal: content.balance_subtotal, balance: content.balance, fully_paid: content.fully_paid, paid_amount: content.paid_amount, date_paid: content.date_paid, markpaid_user: content.markpaid_user };
+    } else {
+        order = { date: content.date_created, invoiceId: content.order_id, gst_hst: '', method: content.method, customerCompanyName: content.company_name, customerNumber: '', customerAddress: '', customerPoProvince: '', products: content.products.split(','), unit_cost: content.prices_discounted.split(','), quantity: content.qtys.split(','), shipped: content.qtys_shipped.split(','), subtotal: content.cost_subtotal, total: content.cost_final };
+    }
+
+    addContent(order, pdfContent);
     doc.save(`${order.invoiceId}.pdf`); // will save the file in the current working directory
 }
 
@@ -28,10 +36,14 @@ function addContent(order) {
     doc.addImage(imgData, 'PNG', 10, 0, 50, 50);
 
     //Order Info
-    doc.text(`Date: ${order.date}`, 130, 20);
-    doc.text(`Invoice #: ${order.invoiceId}`, 130, 25);
-    doc.text(`GST/HST #: ${order.gst_hst}`, 130, 30);
-    doc.text(`Method: ${order.method}`, 130, 35);
+    if ("credit") {
+
+    } else {
+        doc.text(`Date: ${order.date}`, 130, 20);
+        doc.text(`Invoice #: ${order.invoiceId}`, 130, 25);
+        doc.text(`GST/HST #: ${order.gst_hst}`, 130, 30);
+        doc.text(`Method: ${order.method}`, 130, 35);
+    }
 
     // Business Details
     doc.text("Business Details:", 10, 50);
