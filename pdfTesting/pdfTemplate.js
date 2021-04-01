@@ -1,4 +1,5 @@
 const { jsPDF } = require("jspdf"); // will automatically load the node version
+const { autoTable } = require('jspdf-autotable');
 const { imgData } = require("./models.js");
 
 const doc = new jsPDF();
@@ -45,48 +46,42 @@ function addContent(order) {
     doc.text(`Invoice #: ${order.invoiceId}`, 10, 42);
 
     // Business Details
+    doc.setFontSize(15);
     doc.text("Business Details:", 10, 50);
-    doc.text("Max Advanced Brakes", 10, 60); // Company Name
-    doc.text('905-754-0575', 10, 65); // Phone Number
-    doc.text('280 Hilmount Road, Unit 5', 10, 70); // Address
-    doc.text('L6C 3A1 Markham, ON Canada', 10, 75); // PO and Province/State
+    doc.rect(10, 53, 90, 25);
+    doc.setFontSize(10);
+    doc.text("Max Advanced Brakes", 15, 60); // Company Name
+    doc.text('905-754-0575', 15, 65); // Phone Number
+    doc.text('280 Hilmount Road, Unit 5', 15, 70); // Address
+    doc.text('L6C 3A1 Markham, ON Canada', 15, 75); // PO and Province/State
 
     // Customer Details
+    doc.setFontSize(15);
     doc.text("Customer Details:", 130, 50);
-    doc.text(`${order.customerCompanyName}`, 130, 60); // Company Name
-    doc.text(`${order.customerNumber}`, 130, 65); // Phone Number
-    doc.text(`${order.customerAddress}`, 130, 70); // Address
-    doc.text(`${order.customerPoProvince}`, 130, 75); // PO and Province/State
+    doc.rect(130, 53, 70, 25);
+    doc.setFontSize(10);
+    doc.text(`${order.customerCompanyName}`, 135, 60); // Company Name
+    doc.text(`${order.customerNumber}`, 135, 65); // Phone Number
+    doc.text(`${order.customerAddress}`, 135, 70); // Address
+    doc.text(`${order.customerPoProvince}`, 135, 75); // PO and Province/State
+
+    let tableArrObj = [];
+    let headers = ['#', 'Product', 'Max-Product', 'Unit cost (after discounts)', 'Quantity', 'Shipped', 'Total'];
+    for (let i = 0; i < order.products.length; i++) {
+        tableArrObj.push([(i + 1).toString(), order.products[i], '0', Number(order.unit_cost[i]).toFixed(2), order.quantity[i], order.shipped[i], (Number(order.unit_cost[i]) * Number(order.quantity[i])).toFixed(2)]);
+    }
 
     // Table
-    doc.text("Items:", 10, 90);
-    doc.text("#", 10, 100);
-    doc.text("Product", 17, 100);
-    doc.text("MAX-Product", 39, 100);
-    doc.text("Unit cost (after discounts)", 74, 100);
-    doc.text("Quantity", 139, 100);
-    doc.text("Shipped", 161, 100);
-    doc.text("Total", 183, 100);
-    doc.setLineWidth(0.5);
-    doc.line(9, 101, 196, 101);
-    doc.setLineWidth(0.1);
-
-    // Table items
-    doc.setFontSize(10);
-    for (let i = 0; i < order.products.length; i++) {
-        if (i === 0) {
-            tableItem(i, order, yPos);
-        } else {
-            yPos += 5;
-            tableItem(i, order, yPos);
-        }
-    }
     doc.setFontSize(defaultFontSize);
-    doc.setLineWidth(0.5);
-    doc.line(9, yPos + 1, 9, 101); // Left vertical line of table
-    doc.line(196, yPos + 1, 196, 101); // Rgiht vertical line of table
-    doc.line(9, yPos + 1, 196, yPos + 1);
-    doc.setLineWidth(0.1);
+    doc.text("Items:", 10, 90);
+    // Make auto using predefined values
+    doc.autoTable({
+        head: [headers],
+        body: tableArrObj,
+        startY: 105,
+        headStyles: { fillColor: [242, 121, 0] }
+    });
+    yPos = doc.lastAutoTable.finalY;
 
     // Order Total
     yPos += 20;
