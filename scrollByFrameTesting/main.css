@@ -8,14 +8,22 @@ body {
     position: fixed;
     bottom: 0;
     right: 0;
-    width: 99.9%; /* previously 70% */
+    width: 100%; /* previously 70% */
+    z-index: 0;
+}
+
+#testing {
+  position: relative;
+  color: white;
+  z-index: 1;
+  background-color: purple;
 }
 
 #set-height {
     display: block;
 }
 
-/* section {
+section {
     z-index: 1;
     position: relative;
 }
@@ -51,7 +59,7 @@ section:nth-of-type(4) {
 }
 section:nth-of-type(5) {
     height: 4000px;
-} */
+}
 
 .entered {
 	-webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
