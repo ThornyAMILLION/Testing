@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Document</title>
+    <title>Testing scroll based video</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -74,39 +74,39 @@
      
 
     <script src="sticky.js"></script>
-    <script src="./index.js"></script>
+    <!-- <script src="./index.js"></script> -->
     <script>
 
-        // enterView({
-        //     selector: 'section',
-        //     enter: function(el) {
-        //         el.classList.add('entered');
-        //     }
-        // })
+        enterView({
+            selector: 'section',
+            enter: function(el) {
+                el.classList.add('entered');
+            }
+        })
     
-        // var frameNumber = 0, // start video at frame 0
-        // // lower numbers = faster playback
-        // playbackConst = 600, 
-        // // get page height from video duration
-        // setHeight = document.getElementById("set-height"), 
-        // // select video element         
-        // vid = document.getElementById('v0'); 
-        // // var vid = $('#v0')[0]; // jquery option
+        var frameNumber = 0, // start video at frame 0
+        // lower numbers = faster playback
+        playbackConst = 1000, 
+        // get page height from video duration
+        setHeight = document.getElementById("set-height"), 
+        // select video element         
+        vid = document.getElementById('v0'); 
+        // var vid = $('#v0')[0]; // jquery option
 
-        // // dynamically set the page height according to video length
-        // vid.addEventListener('loadedmetadata', function() {
-        // setHeight.style.height = Math.floor(vid.duration) * playbackConst + "px";
-        // });
+        // dynamically set the page height according to video length
+        vid.addEventListener('loadedmetadata', function() {
+        setHeight.style.height = Math.floor(vid.duration) * playbackConst + "px";
+        });
 
 
-        // // Use requestAnimationFrame for smooth playback
-        // function scrollPlay() {  
-        //     var frameNumber = window.pageYOffset/playbackConst;
-        //     vid.currentTime = frameNumber;
-        //     window.requestAnimationFrame(scrollPlay);
-        // }
+        // Use requestAnimationFrame for smooth playback
+        function scrollPlay() {  
+            var frameNumber = window.pageYOffset/playbackConst;
+            vid.currentTime = frameNumber;
+            window.requestAnimationFrame(scrollPlay);
+        }
 
-        // window.requestAnimationFrame(scrollPlay);
+        window.requestAnimationFrame(scrollPlay);
     
     </script>
 </body>

@@ -1,5 +1,5 @@
 var frameNumber = 0; // start video at frame 0
-var playbackConst = 600; // lower numbers = faster playback
+var playbackConst = 1000; // lower numbers = faster playback
 var setHeight = document.getElementById("set-height"); // get page height from video duration   
 var vid = document.getElementById('v0'); // select video element
 // vid = $('#v0')[0]; // jquery option
