@@ -8,7 +8,7 @@ body {
     position: fixed;
     bottom: 0;
     right: 0;
-    width: 100%; /* previously 70% */
+    width: 99%; /* previously 70% */
     z-index: 0;
 }
 
@@ -58,6 +58,12 @@ section:nth-of-type(4) {
     height: 1000px;
 }
 section:nth-of-type(5) {
+    height: 4000px;
+}
+section:nth-of-type(6) {
+    height: 4000px;
+}
+section:nth-of-type(7) {
     height: 4000px;
 }
 
