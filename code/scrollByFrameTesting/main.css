@@ -1,0 +1,16 @@
+body {
+    background-color: #c6d7de;
+    font-family: 'Montserrat';
+    padding: 3em;
+}
+
+#v0 {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%; /* previously 70% */
+}
+
+#set-height {
+    display: block;
+}
