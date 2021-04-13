@@ -10,26 +10,9 @@
     width: 100px;
     height: 100px;
     background: #FFB6C1;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    transform-origin: bottom;
+    transition: transform .3s ease-out;
 }
 
-.bounce:hover {
-    animation-name: bounce;
-    animation-timing-function: ease;
+.child:hover {
+    transform: translate(50px, 0);
 }
-
-@keyframes bounce {
-    1000% {transform: translateX(90px);}
-    0% {transform-origin: 20% 100%;}
-    /* 0%   { transform: translateY(0); }
-    50%  { transform: translateY(-100px); }
-    100% { transform: translateY(0); } */
-}
-
-/* @keyframes moveToRight {
-    100% { transform: translateX(150px); }
-    50% { transform: translateX(150px); } 
-     100% { transform: translateX(300px); } 
-} */
