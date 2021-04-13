@@ -9,10 +9,11 @@
     align-self: flex-end;
     width: 100px;
     height: 100px;
+    display: inline-block;
     background: #FFB6C1;
     transition: transform .3s ease-out;
 }
 
-.child:hover {
-    transform: translate(50px, 0);
+.container:hover .child {
+    transform: translate(100px, 0);
 }
