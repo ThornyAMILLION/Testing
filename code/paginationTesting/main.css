@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination li {
+    color: white;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    list-style-type: none;
+}
+
+.pagination li.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.pagination li:hover:not(.active) { background-color: grey; }
